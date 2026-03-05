@@ -1,0 +1,16 @@
+# --- DATA & RESULTS ---
+Data/
+Dataset/
+Visualizations/
+*.csv
+*.txt
+
+# --- PYTHON ---
+__pycache__/
+*.pyc
+venv/
+env/
+
+# --- IDE & SYSTEM ---
+.vscode/
+.DS_Store
