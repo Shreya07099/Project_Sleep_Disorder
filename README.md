@@ -48,6 +48,10 @@ Class 2 :Obstructive:211:2.3%
 Total:8,800,100%
 
 But the model i have submitted does not give a higher accuracy(about 50%) about it reports Class 1 and Class 2 better than the previous iterations(can be noted in the confusion matrix submitted in the results folder)
-Still needs work
+Still needs work\n
+
+
+
+
 AI Disclosure: Generative AI has been used to technically assist  in the  codes of the preprocessing process of applying SMOTE and under sampling,professional formatting of the README file, and to maintain the structural and memory  efficiency of the Project, but rest assured the author understands each and every concept applied and used and the results
 
