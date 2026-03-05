@@ -69,9 +69,9 @@ def plot(sub):
 #To check please run the preprocess_and_save function with subject id after running the csv_formation.py 
 # and check the csv results in Processed_Dataset Folder
 #Since the matrix dimension is (960*3*1820) for each subject, np array is better
-#csv for each subject will be flattened out to about 1749120 rows each fro 3d to 2d 
+#csv for each subject will be flattened out from 3d to 2d 
 
-def preprocess_and_save(subject_id = "AP01"):
+def preprocess(subject_id = "AP01"):
     df = filter1(subject_id)
     output_dir = "Project_Sleep_Disorder/Processed_Dataset"
     os.makedirs(output_dir, exist_ok=True)
@@ -128,7 +128,8 @@ def preprocess_and_save(subject_id = "AP01"):
     df_export.to_csv(preprocessed_csv_path, index=False)
     
 
-        
-for i in range(1,6):
-     preprocess_and_save(f"AP0{i}")
-     print(f"Preprocessing and saving completed for AP0{i}")
+#Example usage:
+#to preprocess and save for a subject, just call the function with the subject id like this:
+#make sure to run the csv_formation.py file first to generate the combined dataframe 
+# before using it in this script for preprocessing and filtering.
+#preprocess(f"AP0{i}")
