@@ -6,6 +6,10 @@ from sklearn.utils import class_weight
 from imblearn.over_sampling import SMOTE #SMOTE
 from imblearn.under_sampling import RandomUnderSampler #RandomUnderSampler
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 root_dir = os.path.dirname(script_dir)
@@ -27,7 +31,7 @@ def create_model():
 
         # Layer 3
         layers.Conv1D(256, kernel_size=16, activation='relu'),
-        layers.Flatten(), #This keeps the 'timing' of the events better than GlobalAverage
+        layers.Flatten(),
 
         layers.Dense(256, activation='relu'),
         layers.Dropout(0.5), #Stronger dropout for small subject count
@@ -61,7 +65,7 @@ for i, test_sub in enumerate(subjects):
     #load train data
     X_train_list = [feature_scale(np.load(os.path.join(processed_dir, f"X_{s}.npy"))) for s in train_subs]
     X_test = feature_scale(np.load(os.path.join(processed_dir, f"X_{test_sub}.npy")))
-    # Load and Concatenate Training Data
+    #Load and Concatenate Training Data(3 features)
     X_train_list = [np.load(os.path.join(processed_dir, f"X_{s}.npy")) for s in train_subs]
     y_train_list = [np.load(os.path.join(processed_dir, f"y_{s}.npy")) for s in train_subs]
 
@@ -106,3 +110,14 @@ precision, recall, f1, _ = precision_recall_fscore_support(total_y_true, total_y
 #print(f"Overall Accuracy: {accuracy:.4f}")
 #print(f"Macro Precision:  {precision:.4f}")
 #print(f"Macro Recall:     {recall:.4f}")
+###Confusion Matrix
+cm = confusion_matrix(total_y_true, total_y_pred)
+plt.figure(figsize=(8,6))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+            xticklabels=['Normal', 'Hypopnea', 'Obstructive'],
+            yticklabels=['Normal', 'Hypopnea', 'Obstructive'])
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+plt.title('Aggregate Confusion Matrix (LOPO)')
+plt.savefig("LOPO_Confusion_Matrix.png")
+plt.show()
